@@ -248,7 +248,7 @@
                    <div class="form-group">
                        <label for="inputEmail3" class="col-sm-2 control-label no-padding-right">主题</label>
                        <div class="col-sm-10">
-                           <input v-model="sh.sendWTitle" class="form-control" type="text" :value="sh.sendWTitle" />
+                           <input v-model="sh.sendWTitle" class="form-control" type="text" />
                        </div>
                    </div>
                    <div class="form-group">

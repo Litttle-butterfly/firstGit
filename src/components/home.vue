@@ -59,31 +59,6 @@
             </div>
         </div>
     </div>
-    <div id="queryModel" class="modal fade" tabindex="-1" role="dialog">
-       <div class="modal-dialog" role="document">
-           <div class="modal-content">
-               <div class="modal-header">
-                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <span aria-hidden="true">&times;</span></button>
-                   <h4 class="modal-title">模块选择</h4>
-               </div>
-               <div class="modal-body">
-                 <div class="wdetail">
-                   <table>
-                       <tr><td>类型</td><td><select v-model="sh.mtype"><option v-for="it in infoModule" :value="it.id">{{it.name}}</option></select></td></tr>
-                       <tr><td>名称</td><td><input type="text" v-model="sh.mname" /><label><input type="checkbox"  />增加主题名称后缀</label></td></tr>
-                       <tr><td>主题</td><td><label><input type="checkbox" value="" name="words" v-model="sh.words"  />全选</label><label v-for="it in words"><input type="checkbox" :value="it.id" name="words" v-model="sh.words"  />{{it.name}}</label></td></tr>
-                       <tr><td>时间域</td><td><label><input type="radio" :value="1" v-model="sh.mtime" />24小时</label><label><input @click="artlistChange" type="radio" :value="2" v-model="sh.mtime" />3天</label><label><input @click="artlistChange" type="radio" :value="6" v-model="sh.mtime" checked />7天</label><label><input @click="artlistChange" type="radio" :value="29" v-model="sh.mtime" />30天</label></td></tr>
-                       <tr><td>属性</td><td><label><input type="checkbox" value="" name="side" v-model="sh.side"  />全选</label><label v-for="it in side"><input type="checkbox" :value="it.id" name="side" v-model="sh.side"  />{{it.name}}</label></td></tr>
-                       <tr><td>媒体属性</td><td><label><input type="checkbox" value="" name="mediaPro" v-model="sh.mediaPro"  />全选</label><label v-for="it in mediaPro"><input type="checkbox" :value="it.id" name="mediaPro"  v-model="sh.mediaPro" />{{it.name}}</label></td></tr>
-                       <tr><td>媒体平台</td><td><label><input type="checkbox" value="" name="mediaType" v-model="sh.mediaType"  />全选</label><label v-for="it in mediaType"><input @click="artlistChange" type="checkbox" :value="it.id" name="mediaType" v-model="sh.mediaType"  />{{it.name}}</label></td></tr>
-                       <tr><td>地域</td><td><select><option v-model="sh.region" value="">全国</option><option v-for="it in region" :value="it.id" v-model="sh.region">{{it.name}}</option></select></td></tr>
-                   </table>
-                 </div>
-               </div>
-           </div>
-       </div>
-   </div>
    <div id="snapModal" class="modal fade bs-example-modal-lg snapmodal in" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">

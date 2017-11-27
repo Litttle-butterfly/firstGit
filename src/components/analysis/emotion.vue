@@ -22,10 +22,10 @@
               <tr>
                   <td class="text-align-center">监测时间</td>
                   <td>
-                    <label><input @click="artlistChange" type="radio" name="stime" :value="1" v-model="sh.stime" /><span>今天</span></label>
-                    <label><input @click="artlistChange" type="radio" name="stime" :value="2" v-model="sh.stime" /><span>3天</span></label>
-                    <label><input @click="artlistChange" type="radio" name="stime" :value="6" v-model="sh.stime" /><span>7天</span></label>
-                    <label><input @click="artlistChange" type="radio" name="stime" :value="29" v-model="sh.stime" /><span>30天</span></label>
+                    <label><input type="radio" name="stime" :value="1" v-model="sh.stime" /><span>今天</span></label>
+                    <label><input type="radio" name="stime" :value="2" v-model="sh.stime" /><span>3天</span></label>
+                    <label><input type="radio" name="stime" :value="6" v-model="sh.stime" /><span>7天</span></label>
+                    <label><input type="radio" name="stime" :value="29" v-model="sh.stime" /><span>30天</span></label>
                     <label><input type="radio" :value="-1" v-model="sh.stime" /><span>自定义</span></label>
                     <div class="custom" v-show="sh.stime==-1">
                       <el-date-picker
@@ -44,14 +44,14 @@
                   <td class="text-align-center">媒体平台</td>
                   <td>
                       <label> <input type="checkbox"  v-model='checked' @click="checkedAll($event)" value=""/>全部</label>
-                    <label v-for="it in qlist.media_type"><input @click="artlistChange" type="checkbox" :value="it.id" name="media_type" v-model="sh.media_type"  /><span>{{it.name}}</span></label>
+                    <label v-for="it in qlist.media_type"><input type="checkbox" :value="it.id" name="media_type" v-model="sh.media_type"  /><span>{{it.name}}</span></label>
                   </td>
               </tr>
               <tr class="qlisttoggle">
                   <td class="text-align-center">维度</td>
                   <td>
-                    <label><input @click="artlistChange" type="radio" value="" name="dimension" v-model="sh.dimension"  /><span>不限</span></label>
-                    <label v-for="it in qlist.dimension"><input type="radio" :value="it.id" name="dimension" @click="artlistChange" v-model="sh.dimension"  /><span>{{it.name}}</span></label>
+                    <label><input type="radio" value="" name="dimension" v-model="sh.dimension"  /><span>不限</span></label>
+                    <label v-for="it in qlist.dimension"><input type="radio" :value="it.id" name="dimension" v-model="sh.dimension"  /><span>{{it.name}}</span></label>
                   </td>
               </tr>
               <tr class="qlisttoggle">
@@ -66,8 +66,8 @@
               <tr class="qlisttoggle">
                   <td class="text-align-center">媒体属性</td>
                   <td>
-                    <label><input @click="artlistChange" type="radio" value="" name="mediaPro" v-model="sh.property_type"  />不限</label>
-                    <label v-for="it in qlist.property_type"><input type="radio" @click="artlistChange" :value="it.id" name="mediaPro"  v-model="sh.property_type" /><span>{{it.name}}</span></label>
+                    <label><input type="radio" value="" name="mediaPro" v-model="sh.property_type"  />不限</label>
+                    <label v-for="it in qlist.property_type"><input type="radio" :value="it.id" name="mediaPro"  v-model="sh.property_type" /><span>{{it.name}}</span></label>
                   </td>
               </tr>
           </tbody>
