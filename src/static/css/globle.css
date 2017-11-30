@@ -807,16 +807,22 @@ body::-webkit-selection{color:#fff;background:#58b7ff;} */
   width: 20px;
   height: 20px;
 }
+.ifa-s{
+  display: inline-block;
+  width: 9px;
+  height: 18px;
+}
 .ifacenter{
   width: 9px;
   height: 6px;
   margin: 0 auto;
   display: block;
 }
-.ifa-b{
-  display: inline-block;
-  width: 20px;
-  height: 20px;
+.ifa.ifa-triangle-l{
+  background: url(../img/ifa-triangle-l.png)
+}
+.ifa.ifa-triangle-r{
+  background: url(../img/ifa-triangle-r.png)
 }
 .ifa.ifa-edit{
   background: url(../img/ifa-edit.png)

@@ -97,12 +97,13 @@ import  '../node_modules/bootstrap-slider/dist/bootstrap-slider.min.js';
 import  "./static/js/jquery.echarts-init.js";
 import  "./static/js/jquery.range-min.js"
 import  "./static/js/jquery.liMarquee.js"
-// import  "./static/js/swiper-3.4.2.jquery.min.js"
+import  "./static/js/swiper-3.4.2.jquery.min.js"
 import  '../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css';
 import  '../node_modules/bootstrap/dist/css/bootstrap.css';
 import  '../node_modules/font-awesome/css/font-awesome.css';
 import  './static/css/beyond.css';
 import  './static/css/jquery.range.css';
+import  './static/css/swiper-3.4.2.min.css';
 import  './static/css/globle.css';
 
 

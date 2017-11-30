@@ -2,8 +2,8 @@
   <div>
     <div class="container-fluid">
       <div class="xftdei"><h3 class="myh3"> <i class="ifa ifa-option"></i>数据概况</h3></div>
-      <hr/>
-      <div class="row well survey  padding-right-5 padding-left-5">
+      <hr style="margin-top:0;" />
+      <!-- <div class="row well survey  padding-right-5 padding-left-5">
         <div class="col-md-12 col-lg-12 padding-right-5 padding-left-5">
           <div class="seuvey-list">
             <p class="p1 text-color-sky">{{homelist.total}}</p>
@@ -31,6 +31,40 @@
             <p class="p3">{{today}}</p>
           </div>
         </div>
+      </div> -->
+      <div class="row well survey  padding-right-5 padding-left-5">
+        <div class="col-md-2 col-lg-2">
+          <div class="seuvey-list">
+            <p class="p2"><i class="ifa ifa-user"></i>数据量</p>
+            <p class="p1 text-color-sky">{{homelist}}</p>
+            <p class="p3">{{today}}</p>
+          </div>
+        </div>
+        <div class="col-md-10 col-lg-10">
+          <div class="swiper-container">
+            <div class="swiper-wrapper sw-center">
+              <div v-for="it in surveyview" class="swiper-slide sw-det">
+                <p>{{it.name}}</p>
+                <table class="table1">
+                  <tr>
+                    <td>声&nbsp;量：</td><td><div class="progress"><div v-for="(i,idx) in it.side.title" class="progress-bar" :class="sbarcss[idx]" :style='"width:"+it.side.total[idx]/(it.side.total[0]+it.side.total[1]+it.side.total[2])*260+"px"' ><span>{{i}}</span></div></div></td>
+                  </tr>
+                  <tr>
+                    <td>热&nbsp;词：</td><td><span class="span-words" v-for="itt in it.hotwords">{{itt.key}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>来&nbsp;源：</td><td><span class="span-words" v-for="itt in it.source">{{itt.title}}</span></td>
+                  </tr>
+                  <tr>
+                    <td>预警量：</td><td><div class="progress"><div v-for="(i,idx) in it.warning.title" class="progress-bar" :class="swbarcss[idx]" :style='"width:"+it.warning.total[idx]/(it.warning.total[0]+it.warning.total[1]+it.warning.total[2])*260+"px"' ><span>{{i}}</span></div></div></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="sw-left"><i class="ifa ifa-triangle-l ifa-s"></i></div>
+          <div class="sw-right"><i class="ifa ifa-triangle-r ifa-s"></i></div>
+        </div>
       </div>
       <div class="flex-parent row"></div>
       <div class="row">
@@ -39,7 +73,7 @@
         </div>
       </div>
     </div>
-     <div id="addModel" class="modal fade" tabindex="-1" role="dialog">
+    <div id="addModel" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -94,6 +128,7 @@
 </template>
 <script>
 import {getCookie} from './../static/js/globle.js';
+import {Redate} from './../static/js/globle.js';
 export default {
     data() {
         return {
@@ -123,7 +158,7 @@ export default {
           mediaPro:[],
           loadidx:'',
           homelist:'',
-          today:new Date().Format('yyyy/MM/dd'),
+          today:Redate(new Date(),-6)+'-'+new Date().Format('yyyy/MM/dd'),
           sh:{
             mtype:'',
             mname:'',
@@ -139,6 +174,9 @@ export default {
           snap:{
             name:'傻逼文章快照'
           },
+          surveyview:[],
+          sbarcss:['progress-bar-danger','progress-bar-warning','progress-bar-success'],
+          swbarcss:['progress-bar-warning','progress-bar-darkorange','progress-bar-danger']
         }
     },
     created(){
@@ -146,10 +184,37 @@ export default {
       $('.loading-container').removeClass('loading-inactive');
       var html='<li id class="active">Home</li>';
       $('.breadcrumb').html(html);
-      var url='/client/home/get_data_screen',t=this;
+      // var url='/client/home/get_data_screen',t=this;
+      // t.enter(url,{params:{}},function(d){
+      //   d.code!=1?'':t.homelist=d.data["今日"];
+      // })
+      var url='/client/home/data_screen',t=this;
       t.enter(url,{params:{}},function(d){
-        d.code!=1?'':t.homelist=d.data["今日"];
+        d.code!=1?'':t.homelist=d.data.count;
+        for(var i in d.data){
+          if(i!="count"){
+            d.data[i].name=i;
+            t.surveyview.push(d.data[i])
+          }
+        }
       })
+    },
+    watch:{
+      'surveyview':{
+        handler:function(){
+          this.$nextTick(function(){
+            var swiper = new Swiper('.swiper-container', {
+              slidesPerView: 3,
+              spaceBetween: 0,
+              slidesPerGroup: 1,
+              loop: true,
+              loopFillGroupWithBlank: true,
+              nextButton: '.sw-right',
+              prevButton: '.sw-left',
+            });
+          })
+        }
+      }
     },
     mounted(){
         let vt=this;
@@ -866,12 +931,12 @@ table input[type=checkbox],table input[type=radio] {
   margin-right: 12px;
 }
 .theme{
-    text-align: center;
+  text-align: center;
 }
 .theme .thimg{
-    width: 100%;
-    height: 96px;
-    background-color: #c4e3f3;
+  width: 100%;
+  height: 96px;
+  background-color: #c4e3f3;
 }
 .theme .thimg img{
   width: 100%;
@@ -901,10 +966,14 @@ table input[type=checkbox],table input[type=radio] {
     font-size: 35px;
     font-weight: 800;
     line-height: 36px;
+    margin-bottom: 24px;
 }
 .survey .seuvey-list .p2{
   font-size: 16px;
   line-height:16px;
+  text-align: left;
+  padding-top: 14px;
+  margin-bottom: 44px;
 }
 .survey .seuvey-list .p2 i{
   position: relative;
@@ -914,6 +983,7 @@ table input[type=checkbox],table input[type=radio] {
 .survey .seuvey-list .p3{
   font-size: 12px;
   color: #494949;
+  margin-bottom: 62px;
 }
 .survey .seuvey-list:last-child{
   border-right: none;
@@ -925,13 +995,70 @@ table input[type=checkbox],table input[type=radio] {
   background-color: white;
 }
 .widget-body{
-border-bottom:none;
-} .widget-header{
+  border-bottom:none;
+}
+.widget-header{
   border-top:none;
 }
 .myh3{
-      line-height: 18px;
-    font-weight: 400!important;
-    font-size: 20px;
+  line-height: 18px;
+  font-weight: 400!important;
+  font-size: 20px;
+}
+.sw-center{
+  height: 200px;
+}
+.sw-center .sw-det{
+  border-right: 1px solid #ccc;
+}
+.sw-center .sw-det p{
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  text-indent: 30px;
+}
+.sw-center .sw-det .table1{
+  width: 99%;
+}
+.sw-center .sw-det .table1 tr td .progress{
+  position: relative;
+  top:7px;
+  border-radius: 20px;
+}
+.sw-center .sw-det .table1 tr td{
+  height: 40px;
+}
+.sw-center .sw-det .table1 tr td:first-child{
+  width: 70px;
+  text-align: center;
+}
+.sw-center .sw-det .table1 tr td .span-words{
+  display: inline-block;
+  border: 1px solid #2dc3e8;
+  padding: 2px 6px;
+  margin: 0 3px 0 0;
+  border-radius: 13px;
+  font-size: 12px;
+}
+.sw-left,.sw-right{
+  position: absolute;
+  top:0;
+  display: flex;
+  border: 1px solid #ccc;
+  width: 20px;
+  height: 200px;
+  z-index: 10;
+  cursor: pointer;
+  background-color: #fff;
+}
+.sw-left{
+  left: -4px;
+  align-items: center;
+  justify-content: center;
+}
+.sw-right{
+  right: -4px;
+  align-items: center;
+  justify-content: center;
 }
 </style>
