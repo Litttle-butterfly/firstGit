@@ -45,11 +45,14 @@
             <tr>
                 <td class="text-align-center">媒体平台</td>
                 <td>
-                    <label> <input type="checkbox"  v-model='checked' @click="checkedAllmedia()" value="" />全部</label>
-                    <label v-for="it in qlist.media_type"><input @click="artlistChange" type="checkbox" :value="it.id"  name="mediaType" v-model="sh.mediaType"  /><span>{{it.name}}</span></label>
-                  <!--<label><input @click="artlistChange" type="radio" value="" name="mediaType" v-model="sh.mediaType"  /><span>不限</span></label>
-                  <label v-for="it in qlist.media_type"><input @click="artlistChange" type="radio" :value="it.id" name="mediaType" v-model="sh.mediaType"  /><span>{{it.name}}</span></label>
-                 -->
+                  <!-- <div v-for="it in qlist.media_type" :key="it.id" class="checkbox">
+                    <label>
+                      <input @click="artlistChange" type="checkbox" :value="it.id"  name="mediaType" v-model="sh.mediaType" >
+                      <span class="text">{{it.name}}</span>
+                    </label>
+                  </div> -->
+                  <label> <input type="checkbox"  v-model='checked' @click="checkedAllmedia()" value="" />全部</label>
+                  <label v-for="it in qlist.media_type" :key="it.id"><input @click="artlistChange" type="checkbox" :value="it.id"  name="mediaType" v-model="sh.mediaType"  /><span>{{it.name}}</span></label>
                 </td>
             </tr>
             <tr class="qlisttoggle">
@@ -1812,7 +1815,7 @@ a.cur,a.artsort:hover {
   position: relative;
   top: 5px;
 }
-input[type="checkbox"],
+/*input[type="checkbox"],
 input[type="radio"] {
   opacity: 1;
   position: relative;
@@ -1821,7 +1824,7 @@ input[type="radio"] {
   width: 15px;
   height: 15px;
   cursor: pointer;
-}
+}*/
 .input-search {
   padding:14px 5px;
   height: 24px;
